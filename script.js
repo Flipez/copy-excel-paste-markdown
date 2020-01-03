@@ -12,7 +12,9 @@ function looksLikeTable(data) {
 
 editor.addEventListener("paste", function(event) {
   var clipboard = event.clipboardData
-  var data = clipboard.getData('text/plain').trim()
+  var data = clipboard.getData('text/plain')
+  // trim the trailing newline character, if present.
+  data = data.replace(/(?:[\n\u0085\u2028\u2029]|\r\n?)$/, '');
 
   if(looksLikeTable(data)) {
     event.preventDefault()
